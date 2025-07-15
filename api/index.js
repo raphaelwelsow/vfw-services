@@ -13,9 +13,15 @@ const pool = new Pool({
 });
 
 app.get('/', async (req, res) => {
-  // Testabfrage an die Datenbank
-  const result = await pool.query('SELECT NOW()');
-  res.send('Hello World! Time from DB: ' + result.rows[0].now);
+  try {
+    // Alle Zeilen aus der Tabelle "jobs" abfragen
+    const result = await pool.query('SELECT * FROM jobs');
+    // Die Zeilen als JSON zurückgeben
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Fehler beim Abrufen der Daten.' });
+  }
 });
 
 app.listen(port, () => {
