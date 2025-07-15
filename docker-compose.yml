@@ -27,6 +27,7 @@ services:
       - db
     volumes:
       - ./api:/usr/src/api
+      - /usr/src/api/node_modules   # <--- Diese Zeile ergänzt!
 
 volumes:
   db_data:

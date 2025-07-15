@@ -12,7 +12,7 @@ const pool = new Pool({
   database: process.env.DB_NAME,
 });
 
-app.get('/', async (req, res) => {
+app.get('/jobs/', async (req, res) => {
   try {
     // Alle Zeilen aus der Tabelle "jobs" abfragen
     const result = await pool.query('SELECT * FROM jobs');
